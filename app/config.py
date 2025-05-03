@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     TEST_DB_PORT: int
     TEST_DB_NAME: str
 
+    API_KEY: str
+    API_KEY_NAME: str
+
     model_config = SettingsConfigDict(
         env_file=BASE_DIR / ".env"
     )
