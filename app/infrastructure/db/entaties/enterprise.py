@@ -9,9 +9,9 @@ from app.infrastructure.db.entaties.operation import Operations
 
 class Enterprises(Base):
     name: Mapped[str] = mapped_column(primary_key=True)
-    phone: Mapped[str] = mapped_column(nullable=True)
-    estate: Mapped[str] = mapped_column(ForeignKey("estates.address"), nullable=True)
-    operation: Mapped[str] = mapped_column(ForeignKey("operations.name"), nullable=True)
+    phone: Mapped[str | None] = mapped_column(nullable=True)
+    estate: Mapped[str | None] = mapped_column(ForeignKey("estates.address"), nullable=True)
+    operation: Mapped[str | None] = mapped_column(ForeignKey("operations.name"), nullable=True)
 
     estates = relationship("Estates", back_populates="enterprises")
     operations = relationship("Operations", back_populates="enterprises")

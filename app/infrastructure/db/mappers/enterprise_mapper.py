@@ -1,12 +1,11 @@
 from app.core.entities.enterprise.enterprise import Enterprise
-from app.core.repositories.enterprise_repository.dto.enterprise_dto import EnterpriseDto
 from app.infrastructure.db.entaties.enterprise import Enterprises
 
 
 class EnterpriseMapper:
     @staticmethod
-    def to_dto(entity: Enterprises) -> EnterpriseDto:
-        return EnterpriseDto(
+    def to_domain(entity: Enterprises) -> Enterprise:
+        return Enterprise(
             name=entity.name,
             phone=entity.phone,
             estate=entity.estate,

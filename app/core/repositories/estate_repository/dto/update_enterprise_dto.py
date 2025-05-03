@@ -1,5 +1,3 @@
 from pydantic import BaseModel
-
-class Estate(BaseModel):
-    address: str
+class UpdateEstateDto(BaseModel):
     coordinates: str | None = None
