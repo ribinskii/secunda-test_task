@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 
-from app.core.entities.estate.estate import Estate
 from app.core.entities.operation.operation import Operation
 from app.core.repositories.operation_repository.dto.add_operation_dto import AddOperationDto
 from app.core.repositories.operation_repository.dto.update_enterprise_dto import UpdateOperationDto

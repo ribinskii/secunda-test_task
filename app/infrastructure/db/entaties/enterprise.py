@@ -1,10 +1,7 @@
+from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.infrastructure.db.entaties.base import Base
-from sqlalchemy import ForeignKey
-
-from app.infrastructure.db.entaties.estate import Estates
-from app.infrastructure.db.entaties.operation import Operations
 
 
 class Enterprises(Base):

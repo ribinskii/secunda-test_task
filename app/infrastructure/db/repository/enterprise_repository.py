@@ -1,3 +1,6 @@
+from sqlalchemy import and_, func, or_, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.core.entities.enterprise.enterprise import Enterprise
 from app.core.repositories.enterprise_repository.dto.add_enterprise_dto import AddEnterpriseDto
 from app.core.repositories.enterprise_repository.dto.update_enterprise_dto import UpdateEnterpriseDto
@@ -6,8 +9,7 @@ from app.infrastructure.db.entaties.enterprise import Enterprises
 from app.infrastructure.db.entaties.estate import Estates
 from app.infrastructure.db.entaties.operation import Operations
 from app.infrastructure.db.mappers.enterprise_mapper import EnterpriseMapper
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, and_, func, or_
+
 
 class EnterpriseRepositoryImpl(EnterpriseRepository):
     def __init__(self, session: AsyncSession):
@@ -85,11 +87,11 @@ class EnterpriseRepositoryImpl(EnterpriseRepository):
                     Estates.coordinates.is_not(None),
 
                     func.jsonb_extract_path_text(
-                        Estates.coordinates, 'longitude'
+                        Estates.coordinates, "longitude"
                     ).cast(float).between(extreme_left_diameter_point[0], extreme_right_diameter_point[0]),
 
                     func.jsonb_extract_path_text(
-                        Estates.coordinates, 'latitude'
+                        Estates.coordinates, "latitude"
                     ).cast(float).between(extreme_left_diameter_point[1], extreme_right_diameter_point[1])
                 )
             )

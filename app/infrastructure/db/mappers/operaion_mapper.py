@@ -1,7 +1,4 @@
-from app.core.entities.enterprise.enterprise import Enterprise
-from app.core.entities.estate.estate import Estate
 from app.core.entities.operation.operation import Operation
-from app.infrastructure.db.entaties.estate import Estates
 from app.infrastructure.db.entaties.operation import Operations
 
 

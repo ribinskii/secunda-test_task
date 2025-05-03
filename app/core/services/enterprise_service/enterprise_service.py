@@ -1,8 +1,9 @@
+
 from app.core.entities.enterprise.enterprise import Enterprise
 from app.core.repositories.enterprise_repository.dto.add_enterprise_dto import AddEnterpriseDto
 from app.core.repositories.enterprise_repository.dto.update_enterprise_dto import UpdateEnterpriseDto
 from app.core.repositories.enterprise_repository.enterptise_repository import EnterpriseRepository
-from sqlalchemy.ext.asyncio import AsyncSession
+
 
 class EnterpriseService:
     def __init__(self, enterprise_repository: EnterpriseRepository):

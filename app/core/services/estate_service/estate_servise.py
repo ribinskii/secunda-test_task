@@ -3,6 +3,7 @@ from app.core.repositories.estate_repository.dto.add_enterprise_dto import AddEs
 from app.core.repositories.estate_repository.dto.update_enterprise_dto import UpdateEstateDto
 from app.core.repositories.estate_repository.estate_repository import EstateRepository
 
+
 class EstateService:
     def __init__(self, estate_repository: EstateRepository):
         self.estate_repository = estate_repository

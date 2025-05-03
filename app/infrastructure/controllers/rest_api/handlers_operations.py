@@ -1,7 +1,7 @@
 # ruff: noqa: ANN201 B008  B904
 import logging
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.entities.operation.operation import Operation
