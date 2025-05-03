@@ -42,6 +42,7 @@ class EstateRepositoryImpl(EstateRepository):
         await self.session.delete(estate)
         await self.session.commit()
         return EstateMapper.to_domain(estate)
+
     async def update(self, estate_name: str, estate_data: UpdateEstateDto) -> Estate:
         query = select(Estates).filter(Estates.address == estate_name)
         result = await self.session.execute(query)
@@ -56,4 +57,3 @@ class EstateRepositoryImpl(EstateRepository):
         await self.session.commit()
         await self.session.refresh(estate)
         return EstateMapper.to_domain(estate)
-

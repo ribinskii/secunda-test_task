@@ -15,22 +15,31 @@ logger = logging.getLogger(__name__)
 
 router_estate = APIRouter()
 
+
 @router_estate.post("/estate", description="Добавляет адресс")
 async def create_estate(estate: AddEstateDto, session: AsyncSession = Depends(get_db)) -> Estate:
     return await EstateService(EstateRepositoryImpl(session=session)).add(estate=estate)
+
 
 @router_estate.get("/estate", description="Получает данные адресса по имени")
 async def get_estate_by_name(estate_name: str, session: AsyncSession = Depends(get_db)) -> Estate:
     return await EstateService(EstateRepositoryImpl(session=session)).get_by_name(estate_name)
 
+
 @router_estate.get("/estates", description="Получает все адресса")
 async def get_all_estates(session: AsyncSession = Depends(get_db)) -> list[Estate]:
     return await EstateService(EstateRepositoryImpl(session=session)).get_all()
+
 
 @router_estate.delete("/estate", description="Удаляет адресс")
 async def remove_estate(estate_name: str, session: AsyncSession = Depends(get_db)) -> Estate:
     return await EstateService(EstateRepositoryImpl(session=session)).remove(estate_name=estate_name)
 
+
 @router_estate.patch("/estate/{estate_name}", description="Изменяет данные адресса")
-async def update_estate(self, estate_name: str, estate_data: UpdateEstateDto, session: AsyncSession = Depends(get_db)) -> Estate:
-    return await EstateService(EstateRepositoryImpl(session=session)).update(estate_name=estate_name, estate_data=estate_data)
+async def update_estate(
+    self, estate_name: str, estate_data: UpdateEstateDto, session: AsyncSession = Depends(get_db)
+) -> Estate:
+    return await EstateService(EstateRepositoryImpl(session=session)).update(
+        estate_name=estate_name, estate_data=estate_data
+    )

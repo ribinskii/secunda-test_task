@@ -25,19 +25,21 @@ class Settings(BaseSettings):
     API_KEY: str
     API_KEY_NAME: str
 
-    model_config = SettingsConfigDict(
-        env_file=BASE_DIR / ".env"
-    )
+    model_config = SettingsConfigDict(env_file=BASE_DIR / ".env")
 
     @property
     def get_db_url(self) -> str:
-        return (f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@"
-                f"{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}")
+        return (
+            f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@" f"{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        )
 
     @property
     def get_test_db_url(self) -> str:
-        return (f"postgresql+asyncpg://{self.TEST_DB_USER}:{self.TEST_DB_PASSWORD}@"
-                f"{self.TEST_DB_HOST}:{self.TEST_DB_PORT}/{self.TEST_DB_NAME}")
+        return (
+            f"postgresql+asyncpg://{self.TEST_DB_USER}:{self.TEST_DB_PASSWORD}@"
+            f"{self.TEST_DB_HOST}:{self.TEST_DB_PORT}/{self.TEST_DB_NAME}"
+        )
+
 
 def setup_logging(log_level: str) -> None:
     logging.basicConfig(

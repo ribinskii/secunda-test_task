@@ -5,6 +5,7 @@ Revises: e385a0dc515f
 Create Date: 2025-05-03 14:27:33.366781
 
 """
+
 from collections.abc import Sequence
 
 from alembic import op
@@ -19,7 +20,8 @@ depends_on: str | Sequence[str] | None = None
 
 def upgrade() -> None:
     """Upgrade schema."""
-    op.execute(text("""
+    op.execute(
+        text("""
     CREATE OR REPLACE FUNCTION check_operation_depth() RETURNS TRIGGER AS $$
     DECLARE
         depth INTEGER;
@@ -49,13 +51,16 @@ def upgrade() -> None:
         RETURN NEW;
     END;
     $$ LANGUAGE plpgsql;
-    """))
+    """)
+    )
 
-    op.execute(text("""
+    op.execute(
+        text("""
     CREATE TRIGGER validate_operation_depth
     BEFORE INSERT OR UPDATE ON operations
     FOR EACH ROW EXECUTE FUNCTION check_operation_depth();
-    """))
+    """)
+    )
 
 
 def downgrade() -> None:

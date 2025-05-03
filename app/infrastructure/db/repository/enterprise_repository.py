@@ -14,6 +14,7 @@ from app.infrastructure.db.mappers.enterprise_mapper import EnterpriseMapper
 class EnterpriseRepositoryImpl(EnterpriseRepository):
     def __init__(self, session: AsyncSession):
         self.session = session
+
     async def add(self, dto: AddEnterpriseDto) -> Enterprise:
         new_enterprise = Enterprises(
             name=dto.name,
@@ -26,7 +27,7 @@ class EnterpriseRepositoryImpl(EnterpriseRepository):
         await self.session.refresh(new_enterprise)
         return EnterpriseMapper.to_domain(new_enterprise)
 
-    async def get_by_name(self, name: str) ->Enterprise:
+    async def get_by_name(self, name: str) -> Enterprise:
         query = select(Enterprises).filter(Enterprises.name == name)
         result = await self.session.execute(query)
         enterprise = result.scalars().first()
@@ -61,38 +62,32 @@ class EnterpriseRepositoryImpl(EnterpriseRepository):
         return EnterpriseMapper.to_domain(enterprise)
 
     async def get_by_estate_name(self, estate_name: str) -> list[Enterprise]:
-        query = (
-            select(Enterprises)
-            .filter(Enterprises.estate == estate_name)
-        )
+        query = select(Enterprises).filter(Enterprises.estate == estate_name)
         result = await self.session.execute(query)
         enterprises = result.scalars().all()
         return [EnterpriseMapper.to_domain(event) for event in enterprises]
 
     async def get_by_operation_name(self, operation_name: str) -> list[Enterprise]:
-        query = (
-            select(Enterprises)
-            .filter(Enterprises.operation == operation_name)
-        )
+        query = select(Enterprises).filter(Enterprises.operation == operation_name)
         result = await self.session.execute(query)
         enterprises = result.scalars().all()
         return [EnterpriseMapper.to_domain(event) for event in enterprises]
 
-    async def get_by_rectangle(self, extreme_left_diameter_point: tuple[float, float], extreme_right_diameter_point: tuple[float, float]) -> list[Enterprise]:
+    async def get_by_rectangle(
+        self, extreme_left_diameter_point: tuple[float, float], extreme_right_diameter_point: tuple[float, float]
+    ) -> list[Enterprise]:
         query = (
             select(Enterprises)
             .join(Estates)
             .where(
                 and_(
                     Estates.coordinates.is_not(None),
-
-                    func.jsonb_extract_path_text(
-                        Estates.coordinates, "longitude"
-                    ).cast(float).between(extreme_left_diameter_point[0], extreme_right_diameter_point[0]),
-
-                    func.jsonb_extract_path_text(
-                        Estates.coordinates, "latitude"
-                    ).cast(float).between(extreme_left_diameter_point[1], extreme_right_diameter_point[1])
+                    func.jsonb_extract_path_text(Estates.coordinates, "longitude")
+                    .cast(float)
+                    .between(extreme_left_diameter_point[0], extreme_right_diameter_point[0]),
+                    func.jsonb_extract_path_text(Estates.coordinates, "latitude")
+                    .cast(float)
+                    .between(extreme_left_diameter_point[1], extreme_right_diameter_point[1]),
                 )
             )
         )
@@ -103,21 +98,12 @@ class EnterpriseRepositoryImpl(EnterpriseRepository):
 
     async def get_by_nest_operations(self, operation_name: str) -> list[Enterprise]:
         subquery = select(Operations.name).where(
-            or_(
-                Operations.name == operation_name,
-                Operations.parent_name == operation_name
-            )
+            or_(Operations.name == operation_name, Operations.parent_name == operation_name)
         )
 
-        query = (
-            select(Enterprises)
-            .join(Operations)
-            .where(Enterprises.operation.in_(subquery))
-        )
+        query = select(Enterprises).join(Operations).where(Enterprises.operation.in_(subquery))
 
         result = await self.session.execute(query)
         enterprises = result.scalars().all()
 
         return [EnterpriseMapper.to_domain(e) for e in enterprises]
-
-

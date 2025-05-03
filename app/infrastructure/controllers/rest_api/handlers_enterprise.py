@@ -14,42 +14,70 @@ from app.infrastructure.db.session import get_db
 logger = logging.getLogger(__name__)
 
 router_enterprise = APIRouter()
+
+
 @router_enterprise.post("/enterprise", description="Добавляет организиацию")
-async def create_enterprise(enterprise: AddEnterpriseDto = Depends(), session: AsyncSession = Depends(get_db))->Enterprise:
+async def create_enterprise(
+    enterprise: AddEnterpriseDto = Depends(), session: AsyncSession = Depends(get_db)
+) -> Enterprise:
     return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).add(dto=enterprise)
 
+
 @router_enterprise.get("/enterprise/{enterprise_name}", description="Получает организацию по имени")
-async def get_enterprise(enterprise_name: str, session: AsyncSession = Depends(get_db))->Enterprise:
+async def get_enterprise(enterprise_name: str, session: AsyncSession = Depends(get_db)) -> Enterprise:
     return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_name(name=enterprise_name)
 
+
 @router_enterprise.get("/enterprises", description="Получает все организации")
-async def get_enterprises(session: AsyncSession = Depends(get_db))->list[Enterprise]:
+async def get_enterprises(session: AsyncSession = Depends(get_db)) -> list[Enterprise]:
     return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_all()
 
+
 @router_enterprise.patch("/enterprise/{enterprise_name}", description="Изменяет данные организации")
-async def patch_enterprise(name_enterprise: str, update_model: UpdateEnterpriseDto = Depends(), session: AsyncSession = Depends(get_db))-> Enterprise:
-    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).update(name_enterprise=name_enterprise, dto=update_model)
-
-@router_enterprise.delete("/enterprise/{enterprise_name}", description="Удаляет организацию")
-async def delete_enterprise(name_enterprise: str, session: AsyncSession = Depends(get_db))-> Enterprise:
-    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).remove(name_enterprise=name_enterprise)
-
-@router_enterprise.get("/enterprise_by_estate/{estate_name}", description="Получает организацию по адресу")
-async def get_by_estate_name(estate_name: str, session: AsyncSession= Depends(get_db)) -> list[Enterprise]:
-    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_estate_name(estate_name=estate_name)
-
-@router_enterprise.get("/enterprise_by_operation/{operation_name}", description="Получает организации по виду деятельности")
-async def get_by_operation_name(operation_name: str, session: AsyncSession= Depends(get_db)) -> list[Enterprise]:
-    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_operation_name(operation_name=operation_name)
-
-@router_enterprise.get("/enterprise_by_rectangle/", description="Получает оргинизации в прямоугольной области")
-async def get_by_rectangle(extreme_left_diameter_point: str, extreme_right_diameter_point: str, session: AsyncSession= Depends(get_db))-> list[Enterprise]:
-    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_rectangle(
-        extreme_left_diameter_point=extreme_left_diameter_point,
-        extreme_right_diameter_point=extreme_right_diameter_point
+async def patch_enterprise(
+    name_enterprise: str, update_model: UpdateEnterpriseDto = Depends(), session: AsyncSession = Depends(get_db)
+) -> Enterprise:
+    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).update(
+        name_enterprise=name_enterprise, dto=update_model
     )
 
-@router_enterprise.get("/enterprise_by_nest_operations/{operation_name}", description="Палучает организации по всем вложенным видам деятельности")
-async def get_by_nest_operations(operation_name: str, session: AsyncSession= Depends(get_db)) -> list[Enterprise]:
+
+@router_enterprise.delete("/enterprise/{enterprise_name}", description="Удаляет организацию")
+async def delete_enterprise(name_enterprise: str, session: AsyncSession = Depends(get_db)) -> Enterprise:
+    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).remove(name_enterprise=name_enterprise)
+
+
+@router_enterprise.get("/enterprise_by_estate/{estate_name}", description="Получает организацию по адресу")
+async def get_by_estate_name(estate_name: str, session: AsyncSession = Depends(get_db)) -> list[Enterprise]:
+    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_estate_name(
+        estate_name=estate_name
+    )
+
+
+@router_enterprise.get(
+    "/enterprise_by_operation/{operation_name}", description="Получает организации по виду деятельности"
+)
+async def get_by_operation_name(operation_name: str, session: AsyncSession = Depends(get_db)) -> list[Enterprise]:
+    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_operation_name(
+        operation_name=operation_name
+    )
+
+
+@router_enterprise.get("/enterprise_by_rectangle/", description="Получает оргинизации в прямоугольной области")
+async def get_by_rectangle(
+    extreme_left_diameter_point: str, extreme_right_diameter_point: str, session: AsyncSession = Depends(get_db)
+) -> list[Enterprise]:
+    return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_rectangle(
+        extreme_left_diameter_point=extreme_left_diameter_point,
+        extreme_right_diameter_point=extreme_right_diameter_point,
+    )
+
+
+@router_enterprise.get(
+    "/enterprise_by_nest_operations/{operation_name}",
+    description="Палучает организации по всем вложенным видам деятельности",
+)
+async def get_by_nest_operations(operation_name: str, session: AsyncSession = Depends(get_db)) -> list[Enterprise]:
     return await EnterpriseService(EnterpriseRepositoryImpl(session=session)).get_by_nest_operations(
-        operation_name=operation_name)
+        operation_name=operation_name
+    )

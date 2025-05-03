@@ -17,13 +17,7 @@ def setup_openapi(app: FastAPI):
         )
 
         openapi_schema["components"] = {
-            "securitySchemes": {
-                "APIKeyHeader": {
-                    "type": "apiKey",
-                    "name": settings.API_KEY_NAME,
-                    "in": "header"
-                }
-            }
+            "securitySchemes": {"APIKeyHeader": {"type": "apiKey", "name": settings.API_KEY_NAME, "in": "header"}}
         }
 
         openapi_schema["security"] = [{"APIKeyHeader": []}]

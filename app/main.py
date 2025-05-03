@@ -13,7 +13,9 @@ logger = logging.getLogger(__name__)
 app = FastAPI(
     docs_url="/docs",
     title="line_provider",
-    description="API provides information about events that ca be bet on", version="0.0.1")
+    description="API provides information about events that ca be bet on",
+    version="0.0.1",
+)
 
 app = setup_openapi(app)
 

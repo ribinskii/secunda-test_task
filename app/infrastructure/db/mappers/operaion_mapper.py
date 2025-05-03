@@ -8,8 +8,7 @@ class OperationMapper:
         return Operation(
             name=entity.name,
             parent_name=entity.parent_name,
-            )
-
+        )
 
     @staticmethod
     def to_entity(domain_model: Operation) -> Operations:
