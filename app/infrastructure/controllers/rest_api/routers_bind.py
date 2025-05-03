@@ -4,6 +4,7 @@ from app.infrastructure.controllers.rest_api.handlers_enterprise import router_e
 from app.infrastructure.controllers.rest_api.handlers_estate import router_estate
 from app.infrastructure.controllers.rest_api.handlers_operations import router_operation
 
+
 router_base = APIRouter()
 
 router_base.include_router(router_enterprise, prefix="/enterprise")

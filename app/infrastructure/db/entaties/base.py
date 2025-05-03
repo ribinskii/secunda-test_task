@@ -4,6 +4,7 @@ from stringcase import snakecase
 
 from app.config import settings
 
+
 DATABASE_URL = settings.get_db_url
 
 engine = create_async_engine(url=DATABASE_URL)

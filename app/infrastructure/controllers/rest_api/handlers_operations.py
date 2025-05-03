@@ -11,17 +11,20 @@ from app.core.services.operation_service.operation_servise import OperationServi
 from app.infrastructure.db.repository.operation_repository import OperationRepositoryImpl
 from app.infrastructure.db.session import get_db
 
+
 logger = logging.getLogger(__name__)
 
 router_operation = APIRouter()
 
 
-@router_operation.post("/operation", description="Добавляет деятельность")
-async def create_operation(operation: AddOperationDto, session: AsyncSession = Depends(get_db)) -> Operation:
+@router_operation.post("", description="Добавляет деятельность")
+async def create_operation(
+    operation: AddOperationDto = Depends(), session: AsyncSession = Depends(get_db)
+) -> Operation:
     return await OperationService(OperationRepositoryImpl(session=session)).add(operation=operation)
 
 
-@router_operation.get("/operation", description="Получает данные деятельности")
+@router_operation.get("", description="Получает данные деятельности")
 async def get_operation_by_name(operation_name: str, session: AsyncSession = Depends(get_db)) -> Operation:
     return await OperationService(OperationRepositoryImpl(session=session)).get_by_name(operation_name=operation_name)
 
@@ -31,14 +34,14 @@ async def get_all_operations(session: AsyncSession = Depends(get_db)) -> list[Op
     return await OperationService(OperationRepositoryImpl(session=session)).get_all()
 
 
-@router_operation.delete("/operation", description="Удаляет деятельность")
+@router_operation.delete("", description="Удаляет деятельность")
 async def remove_operation(operation_name: str, session: AsyncSession = Depends(get_db)) -> Operation:
     return await OperationService(OperationRepositoryImpl(session=session)).remove(operation_name=operation_name)
 
 
-@router_operation.patch("/operation/{operation_name}", description="Изменяет данные деятельности")
+@router_operation.patch("", description="Изменяет данные деятельности")
 async def update_operation(
-    self, operation_name: str, operation_data: UpdateOperationDto, session: AsyncSession = Depends(get_db)
+    operation_name: str, operation_data: UpdateOperationDto = Depends(), session: AsyncSession = Depends(get_db)
 ) -> Operation:
     return await OperationService(OperationRepositoryImpl(session=session)).update(
         operation_name=operation_name, operation_data=operation_data

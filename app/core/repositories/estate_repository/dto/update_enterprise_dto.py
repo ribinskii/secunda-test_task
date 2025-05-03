@@ -2,4 +2,4 @@ from pydantic import BaseModel
 
 
 class UpdateEstateDto(BaseModel):
-    coordinates: str | None = None
+    coordinates: dict | None = None

@@ -7,6 +7,7 @@ from app.infrastructure.controllers.rest_api.middleware.mw_autorize import api_k
 from app.infrastructure.controllers.rest_api.routers_bind import router_base
 from app.infrastructure.controllers.rest_api.settings_swagger.autorize import setup_openapi
 
+
 setup_logging(settings.LOG_LEVEL)
 logger = logging.getLogger(__name__)
 
