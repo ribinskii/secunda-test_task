@@ -12,7 +12,7 @@ secunda-test_task
     │   ├── repositories # Интерфейс бд
     │   └── services # Бизнес логика
     └── infrastructure # Внешние сервисы
-          ├── controllers # Контроллеры (RestAPI, gRPC, GraphQL)
+          ├── controllers # Контроллеры (RestAPI, gRPC, GraphQL и т.д.)
           └── db # Имплементация бд
 ```
 
