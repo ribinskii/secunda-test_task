@@ -1,5 +1,5 @@
 from app.core.entities.operation.operation import Operation
-from app.infrastructure.db.entaties.operation import Operations
+from app.infrastructure.db.entities.operation import Operations
 
 
 class OperationMapper:

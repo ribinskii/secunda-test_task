@@ -1,5 +1,5 @@
 from app.core.entities.enterprise.enterprise import Enterprise
-from app.infrastructure.db.entaties.enterprise import Enterprises
+from app.infrastructure.db.entities.enterprise import Enterprises
 
 
 class EnterpriseMapper:

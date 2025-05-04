@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "Line-provider"
+name = "secunda-test_task"
 version = "0.1.0"
-description = "event_information_provider"
+description = "secunda-test_task"
 authors = [ "Aleksander_Ribinskii <aleksander.ribinskii@yandex.ru>"]
 package-mode = false
 

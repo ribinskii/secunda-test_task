@@ -5,9 +5,9 @@ from app.core.entities.enterprise.enterprise import Enterprise
 from app.core.repositories.enterprise_repository.dto.add_enterprise_dto import AddEnterpriseDto
 from app.core.repositories.enterprise_repository.dto.update_enterprise_dto import UpdateEnterpriseDto
 from app.core.repositories.enterprise_repository.enterptise_repository import EnterpriseRepository
-from app.infrastructure.db.entaties.enterprise import Enterprises
-from app.infrastructure.db.entaties.estate import Estates
-from app.infrastructure.db.entaties.operation import Operations
+from app.infrastructure.db.entities.enterprise import Enterprises
+from app.infrastructure.db.entities.estate import Estates
+from app.infrastructure.db.entities.operation import Operations
 from app.infrastructure.db.mappers.enterprise_mapper import EnterpriseMapper
 
 

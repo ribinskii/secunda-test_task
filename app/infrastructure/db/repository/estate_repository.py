@@ -5,7 +5,7 @@ from app.core.entities.estate.estate import Estate
 from app.core.repositories.estate_repository.dto.add_enterprise_dto import AddEstateDto
 from app.core.repositories.estate_repository.dto.update_enterprise_dto import UpdateEstateDto
 from app.core.repositories.estate_repository.estate_repository import EstateRepository
-from app.infrastructure.db.entaties.estate import Estates
+from app.infrastructure.db.entities.estate import Estates
 from app.infrastructure.db.mappers.estate_mapper import EstateMapper
 
 

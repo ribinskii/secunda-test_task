@@ -1,7 +1,7 @@
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.infrastructure.db.entaties.base import Base
+from app.infrastructure.db.entities.base import Base
 
 
 class Estates(Base):

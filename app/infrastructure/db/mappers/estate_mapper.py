@@ -1,5 +1,5 @@
 from app.core.entities.estate.estate import Estate
-from app.infrastructure.db.entaties.estate import Estates
+from app.infrastructure.db.entities.estate import Estates
 
 
 class EstateMapper:

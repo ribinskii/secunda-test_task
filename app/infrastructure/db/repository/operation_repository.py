@@ -5,7 +5,7 @@ from app.core.entities.operation.operation import Operation
 from app.core.repositories.operation_repository.dto.add_operation_dto import AddOperationDto
 from app.core.repositories.operation_repository.dto.update_enterprise_dto import UpdateOperationDto
 from app.core.repositories.operation_repository.operation_repository import OperationRepository
-from app.infrastructure.db.entaties.operation import Operations
+from app.infrastructure.db.entities.operation import Operations
 from app.infrastructure.db.mappers.operaion_mapper import OperationMapper
 
 

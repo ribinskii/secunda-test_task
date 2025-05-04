@@ -70,3 +70,5 @@ dmypy.json
 .pyre/
 
 .pytype/
+
+.idea/
