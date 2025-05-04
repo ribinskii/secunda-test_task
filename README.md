@@ -4,15 +4,17 @@
 # Архитектура
 Сервис построен на основе луковой архитектуры.
 
+```bash
 secunda-test_task
 └── app
     ├── core # Ядро сервиса
     │   ├── entities # Бизнес сущности
     │   ├── repositories # Интерфейс для бд
     │   └── services # Бизнес логика
-    └─── infrastructure # Внешние сервисы
-          ├── controllers # Контроллеры (RestAPI, gRPC, GraphQL, и т.д.)
-          └── db # Имлементация бд
+    └── infrastructure # Внешние сервисы
+          ├── controllers # Контроллеры (RestAPI, gRPC, GraphQL)
+          └── db # Имплементация бд
+```
 
 # Запуск проекта
 Для запуска используется утилита make.
