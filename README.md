@@ -9,7 +9,7 @@ secunda-test_task
 └── app
     ├── core # Ядро сервиса
     │   ├── entities # Бизнес сущности
-    │   ├── repositories # Интерфейс для бд
+    │   ├── repositories # Интерфейс бд
     │   └── services # Бизнес логика
     └── infrastructure # Внешние сервисы
           ├── controllers # Контроллеры (RestAPI, gRPC, GraphQL)
