@@ -17,12 +17,6 @@ class Settings(BaseSettings):
 
     LOG_LEVEL: str
 
-    TEST_DB_USER: str
-    TEST_DB_PASSWORD: str
-    TEST_DB_HOST: str
-    TEST_DB_PORT: int
-    TEST_DB_NAME: str
-
     API_KEY: str
     API_KEY_NAME: str
 
@@ -32,13 +26,6 @@ class Settings(BaseSettings):
     def get_db_url(self) -> str:
         return (
             f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@" f"{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-        )
-
-    @property
-    def get_test_db_url(self) -> str:
-        return (
-            f"postgresql+asyncpg://{self.TEST_DB_USER}:{self.TEST_DB_PASSWORD}@"
-            f"{self.TEST_DB_HOST}:{self.TEST_DB_PORT}/{self.TEST_DB_NAME}"
         )
 
 
